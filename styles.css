@@ -39,6 +39,10 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     background-color: var(--bg-main);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 17.32L60 0v34.64L30 51.96 0 34.64V0l30 17.32zm0 86.68l30-17.32V51.96L30 69.28 0 51.96v34.64L30 104z' fill='none' stroke='%23000000' stroke-opacity='0.06' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 60px 104px;
+    background-position: center top;
+    background-attachment: fixed;
 }
 
 a {
@@ -94,6 +98,13 @@ h1, h2, h3, h4, h5 {
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
+}
+
+.section-divider {
+    border: none;
+    border-top: 2px dashed rgba(0,0,0,0.25);
+    margin: 0;
+    width: 100%;
 }
 
 .mt-4 {
@@ -181,17 +192,12 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Hero Section */
-body {
-    background-color: #FDF6EE;
-    font-family: 'Inter', sans-serif;
-}
-
 .hero-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FDF6EE;
+    background-color: transparent;
     padding: 6rem 2rem 2rem;
 }
 
@@ -230,7 +236,7 @@ body {
 }
 
 .hero-content-card {
-    background-color: transparent;
+    background-color: var(--bg-main);
     padding: 1.4rem 1.5rem 1.2rem;
     border: 7px solid #E5DED4;
     border-radius: 20px;
@@ -312,7 +318,7 @@ body {
     border: 5px solid #E5DED4;
     border-radius: 16px;
     box-shadow: 8px 8px 0 #DCD5CA;
-    background-color: transparent;
+    background-color: var(--bg-main);
     color: #000;
     font-size: 2.2rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -334,7 +340,7 @@ body {
     flex-grow: 1;
     text-align: center;
     padding: 1rem 2rem;
-    background-color: transparent;
+    background-color: var(--bg-main);
     border: 6px solid #E5DED4;
     border-radius: 20px;
     box-shadow: 18px 14px 0 #DCD5CA;
@@ -346,9 +352,9 @@ body {
 
 /* Profil Section */
 /* Profil Section - Custom Header Style */
+
 #profil, #artefak {
-    border-top: 1px dashed rgba(0,0,0,0.1);
-    background-color: var(--bg-main) !important;
+    background-color: transparent !important;
     padding: 3rem 0 8rem 0;
 }
 
@@ -371,7 +377,7 @@ body {
 }
 
 .profile-pill {
-    background-color: transparent;
+    background-color: var(--bg-main);
     color: #000;
     padding: 0.8rem 3.5rem;
     border: 6px solid #E5DED4;
@@ -653,7 +659,7 @@ body {
 }
 
 .timeline-content {
-    background-color: transparent;
+    background-color: var(--bg-main);
     border: 5px solid #E5DED4;
     border-radius: 16px;
     box-shadow: 12px 12px 0 #DCD5CA;
