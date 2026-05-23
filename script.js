@@ -873,20 +873,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Unified function to open modal with tabs
     window.openArtifactModal = (type, url) => {
         const data = analysisData[type];
-        if (!data) return;
+        
+        modal.classList.remove('text-only');
+        modal.classList.remove('preview-only');
+        
+        if (!data && !url) return;
         
         currentArtifactData = data;
         
-        // Setup Modal Header
-        modalTitle.innerText = data.title;
-        
-        // Reset tabs to first tab (Konteks)
-        analysisTabs.forEach(t => t.classList.remove('active'));
-        const firstTab = document.querySelector('.analysis-tab-btn[data-atab="konteks"]');
-        if (firstTab) firstTab.classList.add('active');
-        
-        // Render initial text
-        textContent.innerHTML = data.konteks;
+        if (data) {
+            // Setup Modal Header
+            modalTitle.innerText = data.title;
+            
+            // Reset tabs to first tab (Konteks)
+            analysisTabs.forEach(t => t.classList.remove('active'));
+            const firstTab = document.querySelector('.analysis-tab-btn[data-atab="konteks"]');
+            if (firstTab) firstTab.classList.add('active');
+            
+            // Render initial text
+            textContent.innerHTML = data.konteks;
+        } else {
+            modalTitle.innerText = "Pratinjau Dokumen";
+        }
         
         // Handle Iframe vs Text-only logic
         const existingPlaceholder = previewArea.querySelector('.youtube-placeholder');
@@ -964,7 +972,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalDownload.innerText = 'Unduh';
             }
             modalDownload.style.display = 'inline-block';
-            modal.classList.remove('text-only');
+            
+            if (!data) {
+                modal.classList.add('preview-only');
+            }
         } else {
             iframe.style.display = 'block';
             iframe.src = '';
@@ -999,5 +1010,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal && modal.classList.contains('active')) closeModal();
+    });
+
+    // Gallery Tabs Logic
+    const galleryBtns = document.querySelectorAll('.gallery-tab-btn');
+    const galleryContents = document.querySelectorAll('.gallery-content');
+
+    galleryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active from all buttons
+            galleryBtns.forEach(b => b.classList.remove('active'));
+            // Add active to clicked button
+            btn.classList.add('active');
+
+            // Hide all gallery contents
+            galleryContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show target gallery content
+            const targetId = 'gallery-' + btn.getAttribute('data-gallery');
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
     });
 });

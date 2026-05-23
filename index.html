@@ -25,6 +25,7 @@
             <li><a href="#analisis">Analisis</a></li>
             <li><a href="#penilaian">Penilaian</a></li>
             <li><a href="#model-guru">Model Guru</a></li>
+            <li><a href="#galeri">Galeri</a></li>
         </ul>
     </nav>
 
@@ -977,7 +978,7 @@
                             <h5>Instrumen Penilaian Perangkat</h5>
                             <p>Penilaian komprehensif terhadap RPP/Modul Ajar, bahan ajar, media, dan instrumen asesmen.
                             </p>
-                            <a href="#" class="btn-outline"><i class="fas fa-download"></i> Lihat Dokumen</a>
+                            <a href="javascript:void(0)" onclick="openArtifactModal('lampiran7', 'https://drive.google.com/file/d/1-cYezHIhJQZ3IsuAZgu59EFUCHVxUK7h/preview')" class="btn-outline"><i class="fas fa-eye"></i> Lihat Dokumen</a>
                         </div>
                     </div>
 
@@ -990,7 +991,7 @@
                             <h5>Instrumen Penilaian Praktik</h5>
                             <p>Penilaian kinerja langsung di dalam kelas, mencakup keterampilan membuka hingga menutup
                                 pelajaran.</p>
-                            <a href="#" class="btn-outline"><i class="fas fa-download"></i> Lihat Dokumen</a>
+                            <a href="javascript:void(0)" onclick="openArtifactModal('lampiran8', 'https://drive.google.com/file/d/1VggCZxjqOIgaTEfG7mpRrzGCPqSM0rkF/preview')" class="btn-outline"><i class="fas fa-eye"></i> Lihat Dokumen</a>
                         </div>
                     </div>
                 </div>
@@ -1079,6 +1080,70 @@
                             </div>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+    
+    <!-- Galeri Section -->
+    <section id="galeri" class="section">
+        <div class="container">
+            <div class="section-header custom-profile-header">
+                <h2 class="main-title">Galeri Dokumentasi</h2>
+                <div class="profile-pill">DOKUMENTASI</div>
+                <p class="section-subtitle" style="margin-top: 4px; max-width: 800px; line-height: 1.6;">Kumpulan momen dan video praktik mengajar yang terekam selama proses pendidikan.</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="gallery-tabs-container">
+                <div class="gallery-tabs">
+                    <button class="gallery-tab-btn active" data-gallery="video"><i class="fas fa-video"></i> Video Mengajar</button>
+                    <button class="gallery-tab-btn" data-gallery="foto"><i class="fas fa-camera"></i> Foto Mengajar</button>
+                </div>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="gallery-content active" id="gallery-video">
+                <div class="gallery-grid-video">
+                    <!-- Video 1 -->
+                    <div class="gallery-video-card">
+                        <a href="https://youtu.be/Cb7oBMQoEBc" target="_blank" style="text-decoration: none; display: block;">
+                            <div class="video-thumbnail" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://img.youtube.com/vi/Cb7oBMQoEBc/hqdefault.jpg') center/cover no-repeat;">
+                                <i class="fas fa-play" style="color: #fff; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));"></i>
+                            </div>
+                        </a>
+                        <div class="video-info">
+                            <h4>Video Praktik Mengajar</h4>
+                            <p>Rekaman kegiatan pembelajaran di kelas</p>
+                            <a href="https://youtu.be/Cb7oBMQoEBc" target="_blank" class="btn-outline" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem;"><i class="fas fa-external-link-alt"></i> Tonton di YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-content" id="gallery-foto">
+                <div class="gallery-grid-foto">
+                    <!-- Placeholder Foto 1-6 -->
+                    <div class="gallery-foto-card">
+                        <div class="foto-placeholder"><i class="fas fa-image"></i><span>Foto 1</span></div>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <div class="foto-placeholder"><i class="fas fa-image"></i><span>Foto 2</span></div>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <div class="foto-placeholder"><i class="fas fa-image"></i><span>Foto 3</span></div>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <div class="foto-placeholder"><i class="fas fa-image"></i><span>Foto 4</span></div>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <div class="foto-placeholder"><i class="fas fa-image"></i><span>Foto 5</span></div>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <div class="foto-placeholder"><i class="fas fa-image"></i><span>Foto 6</span></div>
+                    </div>
                 </div>
             </div>
         </div>
