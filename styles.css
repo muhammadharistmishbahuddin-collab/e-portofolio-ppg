@@ -811,164 +811,7 @@ h1, h2, h3, h4, h5 {
     font-weight: 400;
 }
 
-/* Asymmetric Focus Layout for Biography */
-.asymmetric-layout {
-    display: flex;
-    align-items: flex-start;
-    gap: 4rem;
-    position: relative;
-}
 
-.bio-text {
-    flex: 0 0 65%;
-    padding-right: 2rem;
-}
-
-.bio-image {
-    flex: 0 0 35%;
-    position: relative;
-    z-index: 2;
-}
-
-.bio-header {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #1a1a1a;
-}
-
-.bio-subheader {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin: 2.5rem 0 1rem 0;
-    color: #1a1a1a;
-}
-
-.poppins-text {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.75;
-    font-size: 1.05rem;
-    color: #333;
-    text-align: left;
-}
-
-.portrait-wrapper {
-    position: relative;
-    width: 320px; /* Fixed frame size */
-    aspect-ratio: 3 / 4; /* Professional portrait ratio */
-    margin-left: -4rem;
-    margin-top: 4.2rem;
-    overflow: hidden; /* Important to keep the zoom inside the frame */
-    border-radius: 24px;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12));
-    transition: transform 0.5s ease;
-}
-
-.portrait-wrapper:hover {
-    transform: scale(1.02);
-}
-
-.portrait-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures image fills the frame */
-    object-position: 85% 50%; /* Focus on the right side to show subject + logo */
-    transform: scale(1.1); /* Slight zoom for better composition */
-    display: block;
-    /* Soft studio lighting effect */
-    mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
-}
-
-/* Custom Quote Box (Matching Reference Image) */
-.custom-quote-box {
-    margin-top: 2.5rem;
-    background-color: #EAE4DC; /* Warm light beige matching the card */
-    padding: 1.2rem 1.2rem 1rem 2rem;
-    border-left: 8px solid #1a1a1a;
-    border-radius: 0 16px 16px 0;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    width: 320px; /* Matching portrait-wrapper width */
-    margin-left: -4rem; /* Matching portrait-wrapper alignment */
-    box-sizing: border-box;
-}
-
-.quote-icon {
-    position: absolute;
-    top: 0.6rem;
-    left: 0.8rem;
-    font-size: 2.5rem;
-    color: rgba(0, 0, 0, 0.1);
-}
-
-.custom-quote-box p {
-    font-style: italic;
-    font-size: 1.05rem;
-    line-height: 1.35;
-    color: #111;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-    margin-bottom: 0.5rem;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: -0.1px;
-    min-height: 5.5rem; /* Prevents layout jump during typing */
-}
-
-.custom-quote-box cite {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 800;
-    font-style: normal;
-    color: #000;
-    font-family: 'Inter', sans-serif;
-}
-
-/* Interests Image Style */
-.interests-wrapper {
-    width: 360px;
-    margin-left: -5.2rem;
-    margin-top: 1.2rem;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-}
-
-.interests-wrapper:hover {
-    transform: translateY(-10px) scale(1.02);
-}
-
-
-.interests-img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Responsive Asymmetric */
-@media (max-width: 992px) {
-    .asymmetric-layout {
-        flex-direction: column;
-    }
-    
-    .bio-text, .bio-image {
-        flex: 0 0 100%;
-        padding-right: 0;
-    }
-    
-    .portrait-wrapper {
-        margin-left: 0;
-        margin-top: 3rem;
-        display: flex;
-        justify-content: center;
-    }
-    
-    .portrait-img {
-        width: 100%;
-        max-width: 400px;
-    }
-}
 
 .narrative {
     margin-bottom: 1.5rem;
@@ -1252,37 +1095,99 @@ h1, h2, h3, h4, h5 {
     100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
 }
 
-/* Refleksi & Footer Section */
-.footer-section {
+/* Main Footer Section */
+.main-footer {
     background-color: var(--secondary-color);
     color: var(--bg-main);
-    padding-bottom: 2rem;
+    padding: 4rem 0 2rem;
 }
 
-.reflection-card {
-    background-color: var(--primary-light);
-    padding: 4rem;
-    border-radius: var(--border-radius);
-    text-align: center;
-    margin-bottom: 4rem;
-    transform: translateY(-80px);
-    box-shadow: var(--shadow-lg);
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
 }
 
-.reflection-card h2 {
+.footer-brand h3 {
     color: var(--bg-main);
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
 }
 
-.reflection-card p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.9);
-    max-width: 800px;
-    margin: 0 auto;
+.footer-brand p {
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 400px;
 }
 
-footer {
+.footer-links h4,
+.footer-contact h4 {
+    color: var(--bg-main);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-links h4::after,
+.footer-contact h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--bg-main);
+    border-radius: 2px;
+}
+
+.footer-nav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav-grid li a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-nav-grid li a:hover {
+    color: var(--bg-main);
+    padding-left: 5px;
+}
+
+.footer-contact .social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-contact .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    color: var(--bg-main);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-contact .social-icon:hover {
+    background: var(--bg-main);
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 2rem;
     text-align: center;
@@ -2120,3 +2025,484 @@ footer {
 }
 
 
+
+
+/* Chooser Landing Page Styles */
+.chooser-body {
+    background-color: var(--bg-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    font-family: var(--font-sans);
+}
+
+.chooser-container {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+}
+
+.chooser-header h1 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.chooser-header p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+}
+
+.chooser-cards {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.chooser-card {
+    background-color: var(--bg-light);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 24px;
+    padding: 3.5rem 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chooser-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border-color: var(--primary-light);
+}
+
+.chooser-icon {
+    font-size: 3.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    background: #fff;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.4s ease;
+}
+
+/* Asymmetric Focus Layout for Biography */
+.asymmetric-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+    position: relative;
+}
+
+.bio-text {
+    flex: 0 0 65%;
+    padding-right: 2rem;
+}
+
+.bio-image {
+    flex: 0 0 35%;
+    position: relative;
+    z-index: 2;
+}
+
+.bio-header {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1a1a1a;
+}
+
+.bio-subheader {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1rem 0;
+    color: #1a1a1a;
+}
+
+.poppins-text {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.75;
+    font-size: 1.05rem;
+    color: #333;
+    text-align: left;
+}
+
+.portrait-wrapper {
+    position: relative;
+    width: 320px; /* Fixed frame size */
+    aspect-ratio: 3 / 4; /* Professional portrait ratio */
+    margin-left: -4rem;
+    margin-top: 4.2rem;
+    overflow: hidden; /* Important to keep the zoom inside the frame */
+    border-radius: 24px;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12));
+    transition: transform 0.5s ease;
+}
+
+.portrait-wrapper:hover {
+    transform: scale(1.02);
+}
+
+.portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills the frame */
+    object-position: 85% 50%; /* Focus on the right side to show subject + logo */
+    transform: scale(1.1); /* Slight zoom for better composition */
+    display: block;
+    /* Soft studio lighting effect */
+    mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+}
+
+/* Custom Quote Box (Matching Reference Image) */
+.custom-quote-box {
+    margin-top: 2.5rem;
+    background-color: #EAE4DC; /* Warm light beige matching the card */
+    padding: 1.2rem 1.2rem 1rem 2rem;
+    border-left: 8px solid #1a1a1a;
+    border-radius: 0 16px 16px 0;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    width: 320px; /* Matching portrait-wrapper width */
+    margin-left: -4rem; /* Matching portrait-wrapper alignment */
+    box-sizing: border-box;
+}
+
+.quote-icon {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.8rem;
+    font-size: 2.5rem;
+    color: rgba(0, 0, 0, 0.1);
+}
+
+.custom-quote-box p {
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: #111;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.1px;
+    min-height: 5.5rem; /* Prevents layout jump during typing */
+}
+
+.custom-quote-box cite {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-style: normal;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Interests Image Style */
+.interests-wrapper {
+    width: 360px;
+    margin-left: -5.2rem;
+    margin-top: 1.2rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.interests-wrapper:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+
+.interests-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive Asymmetric */
+@media (max-width: 992px) {
+    .asymmetric-layout {
+        flex-direction: column;
+    }
+    
+    .bio-text, .bio-image {
+        flex: 0 0 100%;
+        padding-right: 0;
+    }
+    
+    .portrait-wrapper {
+        margin-left: 0;
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .portrait-img {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+.chooser-card:hover .chooser-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: var(--secondary-color);
+    color: var(--bg-main);
+}
+
+.chooser-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.chooser-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.chooser-footer {
+    margin-top: 5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .chooser-header h1 {
+        font-size: 2.2rem;
+    }
+    .chooser-cards {
+        gap: 2rem;
+    }
+}
+
+
+/* Hero Redesign V2 */
+.hero-redesign {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.hero-content-left {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.hero-main-card {
+    background-color: var(--bg-main);
+    padding: 2.5rem;
+    border: 7px solid #E5DED4;
+    border-radius: 30px;
+    box-shadow: 16px 16px 0 #DCD5CA;
+    color: #000;
+}
+
+.hero-footer-redesign {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+}
+
+.hero-image-right {
+    flex: 0.8;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-image-wrapper-modern {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 450px;
+    border-radius: 40px;
+    border: 7px solid #E5DED4;
+    box-shadow: 16px 16px 0 #DCD5CA;
+    overflow: hidden;
+}
+
+.profile-img-modern {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    transform: scale(1.1);
+    transform-origin: center bottom;
+}
+
+.hero-main-card h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1.2rem;
+    color: #000;
+}
+
+.hero-main-card h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 2.3px;
+    margin-bottom: 0;
+    color: #000;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.hero-main-card .hero-divider {
+    margin: 1.2rem 0;
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+    .hero-main-card h3 {
+        margin-bottom: 1rem;
+    }
+    .hero-main-card h1 {
+        font-size: 1.8rem;
+        letter-spacing: 2.2px;
+        white-space: nowrap;
+        margin-bottom: 0;
+    }
+    .hero-main-card .hero-divider {
+        margin: 1rem 0;
+    }
+    .hero-main-card p {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-main-card h3 {
+        margin-bottom: 0.9rem;
+    }
+    .hero-main-card h1 {
+        font-size: 1.55rem;
+        letter-spacing: 1.2px;
+        white-space: nowrap;
+        margin-bottom: 0;
+    }
+    .hero-main-card .hero-divider {
+        margin: 0.9rem 0;
+    }
+    .hero-main-card p {
+        margin-bottom: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-main-card h3 {
+        margin-bottom: 0.8rem;
+    }
+    .hero-main-card h1 {
+        font-size: 1.35rem;
+        letter-spacing: -0.5px;
+        white-space: normal;
+        margin-bottom: 0;
+    }
+    .hero-main-card .hero-divider {
+        margin: 0.8rem 0;
+    }
+    .hero-main-card p {
+        margin-bottom: 0.8rem;
+    }
+}
+
+.hero-main-card p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    color: #111;
+    text-align: justify;
+}
+
+.hero-main-card .hero-subtitle {
+    font-size: 1.32rem;
+    font-weight: 900;
+    color: #000;
+    letter-spacing: 1.8px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+    .hero-main-card .hero-subtitle {
+        font-size: 1.1rem;
+        letter-spacing: 1.8px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-main-card .hero-subtitle {
+        font-size: 0.98rem;
+        letter-spacing: 1.3px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-main-card .hero-subtitle {
+        font-size: 0.85rem;
+        letter-spacing: 0.2px;
+        white-space: normal;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-redesign {
+        flex-direction: column-reverse;
+    }
+    .hero-footer-redesign {
+        flex-direction: column;
+    }
+    .hero-image-wrapper-modern {
+        position: relative;
+        left: auto;
+        transform: none;
+        height: 500px;
+    }
+}
+
+/* Box styling for Reflection answers in portfolio2.html */
+.reflection-box {
+    background-color: var(--bg-light);
+    border: 3px solid #E5DED4;
+    border-radius: 16px;
+    padding: 1.5rem;
+    min-height: 150px;
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--text-main);
+    transition: var(--transition);
+}
+
+.reflection-box:hover {
+    border-color: #d4c8b8;
+}
