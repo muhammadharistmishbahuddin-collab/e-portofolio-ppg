@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemilihan E-Portfolio | Muhammad Harist Mishbahuddin</title>
+    <title>Pemilihan E-Portofolio | Muhammad Harist Mishbahuddin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,39 +15,162 @@
 </head>
 
 <body class="chooser-body">
-    <div class="chooser-container">
-        <div class="chooser-header">
-            <h1>Muhammad Harist Mishbahuddin</h1>
-            <p>E-Portofolio Peserta PPG Calon Guru 2026 Gelombang 1</p>
-            <div class="motto-pill" style="margin: 2rem auto; font-size: 1.1rem;">~ Prayers Progress Patience ~</div>
+    <!-- Splash Screen / Loading Page -->
+    <div class="splash-screen" id="splashScreen">
+        <!-- Curtain panels -->
+        <div class="splash-panel splash-panel-top"></div>
+        <div class="splash-panel splash-panel-bottom"></div>
+        
+        <!-- Content -->
+        <div class="splash-content" id="splashContent">
+            <div class="splash-logo-container">
+                <img src="logo_ppg.png" alt="PPG Logo" class="splash-logo">
+            </div>
+            <h2 class="splash-title">E-PORTOFOLIO PPG PRAJABATAN 2026</h2>
+            
+            <!-- Modern Progress Bar -->
+            <div class="splash-loader-container" id="splashLoaderContainer">
+                <div class="splash-loader-bar"></div>
+            </div>
+            
+            <!-- Prompt (initially hidden) -->
+            <div class="splash-prompt hidden" id="splashPrompt">
+                <p class="splash-scroll-text">Scroll to view</p>
+                <p class="splash-sub-text">Geser untuk membuka e-portofolio</p>
+                <div class="scroll-indicator">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="chooser-cards">
-            <!-- Portofolio 1 -->
-            <a href="portfolio1.html" class="chooser-card">
-                <div class="chooser-icon">
-                    <i class="fas fa-book-open"></i>
+    <div class="chooser-container">
+        <div class="chooser-layout">
+            <!-- Left: Hero Info -->
+            <div class="chooser-hero">
+                <span class="chooser-badge">PPG CALON GURU 2026</span>
+                <h1>Muhammad Harist Mishbahuddin</h1>
+                <p class="chooser-subtitle">Gelombang 1 — Universitas Sebelas Maret</p>
+                <p class="chooser-intro">Selamat datang di portal E-Portofolio. Halaman ini mendokumentasikan perjalanan akademik, karya inovasi, aksi nyata, dan refleksi kritis yang telah saya laksanakan selama menempuh program Pendidikan Profesi Guru.</p>
+                <div class="motto-wrapper">
+                    <span class="motto-title">Prinsip Pendidik</span>
+                    <div class="chooser-motto">~ Prayers Progress Patience ~</div>
                 </div>
-                <h2>E-Portofolio 1</h2>
-                <p>Dokumentasi perjalanan siklus pertama, karya, artefak, dan refleksi pedagogis.</p>
-                <span class="btn-outline" style="display:inline-block; margin-top: auto;">Buka Portofolio</span>
-            </a>
+            </div>
 
-            <!-- Portofolio 2 -->
-            <a href="portfolio2.html" class="chooser-card">
-                <div class="chooser-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h2>E-Portofolio 2</h2>
-                <p>Dokumentasi perjalanan lanjutan, inovasi pembelajaran, dan analisis karya guru.</p>
-                <span class="btn-outline" style="display:inline-block; margin-top: auto;">Buka Portofolio</span>
-            </a>
+            <!-- Right: Interactive Choice Cards -->
+            <div class="chooser-cards-wrapper">
+                <!-- Portofolio 1 -->
+                <a href="portfolio1.html" class="chooser-card">
+                    <div class="chooser-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="chooser-card-content">
+                        <span class="card-badge">SIKLUS I &amp; ARTEFAK</span>
+                        <h2>E-Portofolio 1</h2>
+                        <p>Dokumentasi perjalanan siklus pertama, karya inovasi, artefak pembelajaran, dan analisis hasil refleksi pedagogis.</p>
+                        <div class="card-action">
+                            <span>Buka Portofolio</span>
+                            <i class="fas fa-arrow-right arrow-icon"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Portofolio 2 -->
+                <a href="portfolio2.html" class="chooser-card">
+                    <div class="chooser-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="chooser-card-content">
+                        <span class="card-badge">SIKLUS II &amp; REFLEKSI AKHIR</span>
+                        <h2>E-Portofolio 2</h2>
+                        <p>Refleksi akhir PPL Terbimbing, umpan balik komprehensif, serta kajian filosofi dan prinsip mengajar yang saya terapkan.</p>
+                        <div class="card-action">
+                            <span>Buka Portofolio</span>
+                            <i class="fas fa-arrow-right arrow-icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
         
         <div class="chooser-footer">
-            <p>&copy; 2026 E-Portfolio PPG Prajabatan.</p>
+            <p>&copy; 2026 E-Portofolio PPG Prajabatan.</p>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const splash = document.getElementById('splashScreen');
+            
+            // Check if skip-splash is in the URL query string
+            const urlParams = new URLSearchParams(window.location.search);
+            const skipSplash = urlParams.get('skip-splash');
+
+            if (skipSplash === 'true') {
+                if (splash) splash.style.display = 'none';
+                document.body.style.overflow = '';
+                return;
+            }
+
+            const loaderBar = document.querySelector('.splash-loader-bar');
+            const loaderContainer = document.getElementById('splashLoaderContainer');
+            const prompt = document.getElementById('splashPrompt');
+            const content = document.getElementById('splashContent');
+            const panelTop = document.querySelector('.splash-panel-top');
+            const panelBottom = document.querySelector('.splash-panel-bottom');
+
+            if (loaderBar) {
+                loaderBar.addEventListener('animationend', () => {
+                    // Fade out loader
+                    loaderContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        loaderContainer.style.display = 'none';
+                        // Fade in prompt
+                        prompt.classList.remove('hidden');
+                        setTimeout(() => {
+                            prompt.classList.add('fade-in');
+                        }, 50);
+                    }, 300);
+                });
+            }
+
+            let interacted = false;
+            const hideSplash = () => {
+                if (interacted) return;
+                interacted = true;
+                
+                // Unlock scrolling
+                document.body.style.overflow = '';
+                
+                // Step 1: Fade out content
+                content.style.opacity = '0';
+                
+                // Step 2: Split curtain panels
+                setTimeout(() => {
+                    panelTop.style.transform = 'translateY(-100%)';
+                    panelBottom.style.transform = 'translateY(100%)';
+                    
+                    // Step 3: Hide parent wrapper after curtain completes
+                    setTimeout(() => {
+                        splash.style.display = 'none';
+                    }, 800);
+                }, 200);
+            };
+
+            // Allow interaction to skip or trigger splash screen close
+            window.addEventListener('wheel', hideSplash, { passive: true });
+            window.addEventListener('touchmove', hideSplash, { passive: true });
+            window.addEventListener('keydown', (e) => {
+                if (['ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) {
+                    hideSplash();
+                }
+            });
+            splash.addEventListener('click', hideSplash);
+            
+            // Initial lock
+            document.body.style.overflow = 'hidden';
+        });
+    </script>
 </body>
 
 </html>
