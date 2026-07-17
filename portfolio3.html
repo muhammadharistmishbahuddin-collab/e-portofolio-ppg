@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portofolio PPL | Mahasiswa PPG Prajabatan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=11">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <ul class="nav-pills">
+            <li><a href="index.html?skip-splash=true" style="background-color: var(--secondary-color); color: var(--bg-main);"><i class="fas fa-arrow-left"></i> Kembali</a></li>
+            <li><a href="#home" class="active">Beranda</a></li>
+            <li><a href="#refleksi-matkul">Refleksi Matkul</a></li>
+            <li><a href="#dokumentasi">Dokumentasi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header / Home Section Redesign -->
+    <header id="home" class="hero-section">
+        <div class="hero-container hero-redesign">
+            <div class="hero-content-left">
+                <div class="hero-main-card">
+                    <h3>Hello There!, I'm</h3>
+                    <h1>Muhammad Harist Mishbahuddin</h1>
+                    <hr class="hero-divider">
+                    <p>Seorang pendidik yang berkomitmen menanamkan semangat bahwa kesuksesan dapat diraih melalui tekad
+                        kuat dan pantang menyerah. Memiliki minat pada desain, manufaktur, dan energi terbarukan.</p>
+                    <h4 class="hero-subtitle">E - Portofolio Peserta PPG Calon Guru 2026 Gel - 1</h4>
+                </div>
+
+                <div class="hero-footer-redesign">
+                    <div class="motto-pill">
+                        ~ Prayers Progress Patience ~
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/muhammadharistmishbahuddin" target="_blank"
+                            class="icon-link" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/mishbahuddin71?igsh=MXUybzA3cHNhMzRzOA=" target="_blank"
+                            class="icon-link" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@muhammadharistmishbahuddin" target="_blank"
+                            class="icon-link" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image-right">
+                <div class="hero-image-wrapper-modern">
+                    <img src="profile2.jpg" alt="Profile" class="profile-img-modern">
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <hr class="section-divider">
+
+
+
+">
+
+    <!-- Refleksi Mata Kuliah Section -->
+    <section id="refleksi-matkul" class="section">
+        <div class="container">
+            <div class="section-header custom-profile-header">
+                <div class="profile-pill">REFLEKSI MATA KULIAH</div>
+
+
+            </div>
+
+            <!-- Global Filter Bar -->
+            <div class="global-filter-wrapper">
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="semua">Semua</button>
+                    <button class="filter-btn" data-filter="sem1">Semester 1</button>
+                    <button class="filter-btn" data-filter="sem2">Semester 2</button>
+                </div>
+            </div>
+
+            <div id="matkul-all" class="tab-content active">
+                <div class="file-grid">
+                    <!-- Placeholder File 4 -->
+                    <div class="file-item" data-category="sem1">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=1fbfT0tW0OEH-tkAe4fli0kGYvL-6DzKt&sz=w1000" alt="Preview PPL Terbimbing">
+                            <div class="file-badge" style="background-color: #2ecc71;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>PPL Terbimbing</h4>
+                            <p>Refleksi mengenai pelaksanaan PPL Terbimbing, pendampingan guru pamong, dan penerapan perangkat pembelajaran di sekolah mitra.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('ppl_terbimbing', 'https://drive.google.com/file/d/1fbfT0tW0OEH-tkAe4fli0kGYvL-6DzKt/preview')"
+                                    class="btn-outline">Analisis</button>
+                                <a href="https://drive.google.com/file/d/1fbfT0tW0OEH-tkAe4fli0kGYvL-6DzKt/view" class="btn-outline" target="_blank">Unduh</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder File 5 -->
+                    <div class="file-item" data-category="sem1">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=1obkvtEst0zFD3TWqzunRn9OCvH_9JD9Q&sz=w1000" alt="Preview Growth Mindset">
+                            <div class="file-badge" style="background-color: #f59e0b;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Growth Mindset</h4>
+                            <p>Refleksi mengenai penerapan growth mindset (pola pikir berkembang) dalam memotivasi diri sendiri dan membina ketahanan belajar peserta didik.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('growth_mindset', 'https://drive.google.com/file/d/1obkvtEst0zFD3TWqzunRn9OCvH_9JD9Q/preview')"
+                                    class="btn-outline">Analisis</button>
+                                <a href="https://drive.google.com/file/d/1obkvtEst0zFD3TWqzunRn9OCvH_9JD9Q/view" class="btn-outline" target="_blank">Unduh</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder File 3 -->
+                    <div class="file-item" data-category="sem1">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=154wuB27f31rxd0a8SOZaHQJCzoT8k5da&sz=w1000" alt="Preview Pembelajaran Mendalam dan Asesmen">
+                            <div class="file-badge" style="background-color: #9b59b6;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Pembelajaran Mendalam dan Asesmen</h4>
+                            <p>Refleksi mengenai konsep pembelajaran mendalam (deep learning) dan perancangan asesmen yang komprehensif serta berkelanjutan.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('pembelajaran_mendalam_asesmen', 'https://drive.google.com/file/d/154wuB27f31rxd0a8SOZaHQJCzoT8k5da/preview')"
+                                    class="btn-outline">Analisis</button>
+                                <a href="https://drive.google.com/file/d/154wuB27f31rxd0a8SOZaHQJCzoT8k5da/view" class="btn-outline" target="_blank">Unduh</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder File 1 -->
+                    <div class="file-item" data-category="sem1">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=1ICLyfCfg4JeHUCfiBqjbMXXwbs8VCrWK&sz=w1000" alt="Preview Filosofi Pendidikan dan Pendidikan Nilai">
+                            <div class="file-badge" style="background-color: #3498db;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Filosofi Pendidikan dan Pendidikan Nilai</h4>
+                            <p>Refleksi mengenai perjalanan pendidikan nasional, pemikiran Ki Hadjar Dewantara, serta nilai-nilai pendidikan yang diintegrasikan.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('filosofi_pendidikan_nilai', 'https://drive.google.com/file/d/1ICLyfCfg4JeHUCfiBqjbMXXwbs8VCrWK/preview')"
+                                    class="btn-outline">Analisis</button>
+                                <a href="https://drive.google.com/file/d/1ICLyfCfg4JeHUCfiBqjbMXXwbs8VCrWK/view" class="btn-outline" target="_blank">Unduh</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder File 2 -->
+                    <div class="file-item" data-category="sem1">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=1Me1z-IjIU89r6nfsU0wAM7iSNmHhas0Q&sz=w1000" alt="Preview Pemahaman Tentang Peserta Didik dan Pembelajaran">
+                            <div class="file-badge" style="background-color: #e74c3c;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Pemahaman Tentang Peserta Didik dan Pembelajaran</h4>
+                            <p>Refleksi tentang perkembangan peserta didik, teori belajar, dan perancangan pembelajaran yang berpusat pada karakteristik peserta didik.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('pemahaman_peserta_didik', 'https://drive.google.com/file/d/1Me1z-IjIU89r6nfsU0wAM7iSNmHhas0Q/preview')"
+                                    class="btn-outline">Analisis</button>
+                                <a href="https://drive.google.com/file/d/1Me1z-IjIU89r6nfsU0wAM7iSNmHhas0Q/view" class="btn-outline" target="_blank">Unduh</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Dokumentasi Section -->
+    <section id="dokumentasi" class="section">
+        <div class="container">
+            <div class="section-header custom-profile-header">
+                <h2 class="main-title">Galeri Dokumentasi</h2>
+                <div class="profile-pill">DOKUMENTASI</div>
+                <p class="section-subtitle" style="margin-top: 4px; max-width: 800px; line-height: 1.6;">Kumpulan momen dan video praktik mengajar yang terekam selama proses pendidikan.</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="gallery-tabs-container">
+                <div class="gallery-tabs">
+                    <button class="gallery-tab-btn active" data-gallery="video"><i class="fas fa-video"></i> Video Mengajar</button>
+                    <button class="gallery-tab-btn" data-gallery="foto"><i class="fas fa-camera"></i> Foto Mengajar</button>
+                </div>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="gallery-content active" id="gallery-video">
+                <div class="gallery-grid-video">
+                    <!-- Video 1 -->
+                    <div class="gallery-video-card">
+                        <a href="https://youtu.be/Cb7oBMQoEBc" target="_blank" style="text-decoration: none; display: block;">
+                            <div class="video-thumbnail" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://img.youtube.com/vi/Cb7oBMQoEBc/hqdefault.jpg') center/cover no-repeat;">
+                                <i class="fas fa-play" style="color: #fff; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));"></i>
+                            </div>
+                        </a>
+                        <div class="video-info">
+                            <h4>Video Praktik Mengajar</h4>
+                            <p>Rekaman kegiatan pembelajaran di kelas</p>
+                            <a href="https://youtu.be/Cb7oBMQoEBc" target="_blank" class="btn-outline" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem;"><i class="fas fa-external-link-alt"></i> Tonton di YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-content" id="gallery-foto">
+                <div class="gallery-grid-foto">
+                    <!-- Foto 1-6 -->
+                    <div class="gallery-foto-card">
+                        <a href="https://drive.google.com/file/d/1uF4scYhjft8wMitAkwtS4U43_eecJU85/view?usp=sharing" target="_blank" style="display: block; width: 100%; height: 100%;">
+                            <img src="https://drive.google.com/thumbnail?id=1uF4scYhjft8wMitAkwtS4U43_eecJU85&sz=w1000" alt="Foto 1" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </a>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <a href="https://drive.google.com/file/d/1G-131_5MfCOl7jmCR-ZrXokywXaHMa1x/view?usp=sharing" target="_blank" style="display: block; width: 100%; height: 100%;">
+                            <img src="https://drive.google.com/thumbnail?id=1G-131_5MfCOl7jmCR-ZrXokywXaHMa1x&sz=w1000" alt="Foto 2" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </a>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <a href="https://drive.google.com/file/d/10NoZN7AuwrEkf3ht0bbBeKctMnoNMNq7/view?usp=sharing" target="_blank" style="display: block; width: 100%; height: 100%;">
+                            <img src="https://drive.google.com/thumbnail?id=10NoZN7AuwrEkf3ht0bbBeKctMnoNMNq7&sz=w1000" alt="Foto 3" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </a>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <a href="https://drive.google.com/file/d/1VSvDtVwszIjIBSHgN9py75GpS5Sd7iaY/view?usp=sharing" target="_blank" style="display: block; width: 100%; height: 100%;">
+                            <img src="https://drive.google.com/thumbnail?id=1VSvDtVwszIjIBSHgN9py75GpS5Sd7iaY&sz=w1000" alt="Foto 4" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </a>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <a href="https://drive.google.com/file/d/1cLn-ajtflZMkKBj3lO3SHxaAKSWRCHJl/view?usp=sharing" target="_blank" style="display: block; width: 100%; height: 100%;">
+                            <img src="https://drive.google.com/thumbnail?id=1cLn-ajtflZMkKBj3lO3SHxaAKSWRCHJl&sz=w1000" alt="Foto 5" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </a>
+                    </div>
+                    <div class="gallery-foto-card">
+                        <a href="https://drive.google.com/file/d/1QZUQ_adWmo227RnvQB0Wp2gYX-7tvqsS/view?usp=sharing" target="_blank" style="display: block; width: 100%; height: 100%;">
+                            <img src="https://drive.google.com/thumbnail?id=1QZUQ_adWmo227RnvQB0Wp2gYX-7tvqsS&sz=w1000" alt="Foto 6" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Footer Section -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>E-Portofolio PPL</h3>
+                    <p>Mendokumentasikan perjalanan dan perkembangan kompetensi guru profesional secara komprehensif.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Tautan Cepat</h4>
+                    <ul class="footer-nav-grid" style="grid-template-columns: 1fr;">
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#refleksi-matkul">Refleksi Matkul</a></li>
+                        <li><a href="#dokumentasi">Dokumentasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Kontak</h4>
+                    <ul class="footer-contact-info">
+                        <li><i class="fas fa-envelope"></i> harist.mishbah@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bantul, Yogyakarta</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 E-Portofolio PPG Prajabatan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="preview-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Pratinjau Dokumen</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-sidebar">
+                    <div class="sidebar-content">
+                        <div class="analysis-tabs">
+                            <button class="analysis-tab-btn active" data-atab="konteks">KONTEKS PEMBUATAN</button>
+                            <button class="analysis-tab-btn" data-atab="tujuan">TUJUAN</button>
+                            <button class="analysis-tab-btn" data-atab="teori">KAJIAN TEORI</button>
+                            <button class="analysis-tab-btn" data-atab="kelebihan">KELEBIHAN</button>
+                            <button class="analysis-tab-btn" data-atab="kekurangan">KEKURANGAN</button>
+                        </div>
+                        <div class="analysis-pane">
+                            <div class="analysis-pane-content" id="analysis-text-content">
+                                <!-- Dynamic text goes here -->
+                            </div>
+                        </div>
+                        <div class="sidebar-info-badge" style="margin-top: auto;">
+                            <i class="fas fa-info-circle"></i> Artefak Terverifikasi
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-preview-area">
+                    <iframe id="preview-iframe" src="" frameborder="0" allow="autoplay"></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="modal-download" href="#" class="btn primary-btn" target="_blank">Buka di Tab Baru</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Scroll reveal animation for Timeline and Bento grid
+        document.addEventListener('DOMContentLoaded', function() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            function checkReveal() {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+                
+                reveals.forEach(reveal => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkReveal);
+            checkReveal(); // Trigger once on load
+            
+            // Intersection Observer for Split Scroll Navigation Highlight
+            const sections = document.querySelectorAll('.scroll-content-section');
+            const navLinks = document.querySelectorAll('.scroll-nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Trigger when section occupies the focus area
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav');
+                            if (link.getAttribute('href') === `#${activeId}`) {
+                                link.classList.add('active-nav');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

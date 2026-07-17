@@ -224,6 +224,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Document Analysis Modal Logic
 const analysisData = {
+    filosofi_pendidikan_nilai: {
+        title: "ANALISIS FILOSOFI PENDIDIKAN DAN PENDIDIKAN NILAI",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan jurnal refleksi mata kuliah Filosofi Pendidikan dan Pendidikan Nilai Semester 1 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Menganalisis dan merefleksikan pemikiran Ki Hadjar Dewantara mengenai dasar-dasar pendidikan nasional serta pengintegrasian nilai-nilai karakter dalam proses pembelajaran.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Sistem Among:</strong> Penerapan metode momong, among, dan ngemong untuk menuntun kekuatan kodrat anak.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Trisentra Pendidikan:</strong> Sinergitas peran keluarga, sekolah, dan masyarakat dalam membentuk karakter peserta didik.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Refleksi ditulis secara kritis dan menghubungkan teori filosofi klasik dengan realita praktik mengoperasikan kelas di SMK secara relevan.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Hubungan antara pendidikan nilai dan mata kuliah produktif teknik pemesinan perlu dielaborasi secara lebih mendalam dengan contoh konkret di area bengkel.</li>
+            </ul>`
+    },
+    pemahaman_peserta_didik: {
+        title: "ANALISIS PEMAHAMAN TENTANG PESERTA DIDIK DAN PEMBELAJARAN",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan jurnal refleksi mata kuliah Pemahaman Tentang Peserta Didik dan Pembelajaran Semester 1 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Memahami karakteristik perkembangan peserta didik, teori-teori belajar, dan bagaimana merancang lingkungan belajar yang aman dan nyaman bagi siswa.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Teori Perkembangan Kognitif (Piaget) & Sosio-kultural (Vygotsky):</strong> Dasar penentuan kesiapan belajar anak berdasarkan usia dan lingkungan sosial.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Developmentally Appropriate Practice (DAP):</strong> Pendekatan pembelajaran yang disesuaikan dengan tahapan tumbuh kembang siswa.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Pemetaan karakteristik siswa disajikan dengan mendalam dan membantu guru dalam merancang modul ajar berdiferensiasi secara presisi.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Integrasi asesmen diagnostik non-kognitif (seperti gaya belajar visual/auditori) perlu diperjelas instrumennya di lampiran.</li>
+            </ul>`
+    },
+    pembelajaran_mendalam_asesmen: {
+        title: "ANALISIS PEMBELAJARAN MENDALAM DAN ASESMEN",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan jurnal refleksi mata kuliah Pembelajaran Mendalam dan Asesmen Semester 1 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Menganalisis prinsip pembelajaran mendalam (deep learning) serta perancangan berbagai bentuk asesmen formatif dan sumatif yang efektif untuk mengukur ketercapaian kompetensi.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Understanding by Design (UbD):</strong> Pendekatan perencanaan pembelajaran dengan alur mundur (backward design) yang fokus pada tujuan pemahaman mendalam.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Assessment for, as, and of Learning:</strong> Konsep integrasi asesmen selama proses belajar (formatif) dan akhir pembelajaran (sumatif).</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Perancangan rubrik penilaian yang sangat detail dan objektif untuk berbagai jenis tugas proyek maupun kognitif.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Implementasi asesmen diri (self-assessment) bagi siswa di kelas perlu diberikan panduan operasional yang lebih praktis.</li>
+            </ul>`
+    },
+    ppl_terbimbing: {
+        title: "ANALISIS PPL TERBIMBING",
+        konteks: `<p class="analysis-text-para">Jurnal refleksi pelaksanaan PPL Terbimbing Semester 1 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Melakukan refleksi kritis terhadap praktik mengajar terbimbing, penerapan rencana pembelajaran, pengelolaan kelas, dan kolaborasi dengan guru pamong serta dosen pembimbing lapangan.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Reflective Teaching (Schon):</strong> Proses berpikir kritis atas tindakan mengajar (reflection-in-action & reflection-on-action) untuk pengembangan profesional.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Classroom Management:</strong> Strategi pengkondisian kelas vokasi yang aktif, produktif, dan aman.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Integrasi umpan balik dari guru pamong dilakukan secara berkala dan terstruktur untuk perbaikan perangkat ajar berikutnya.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Dokumentasi observasi karakteristik awal kelas perlu dianalisis lebih tajam sebelum memulai perancangan modul.</li>
+            </ul>`
+    },
+    growth_mindset: {
+        title: "ANALISIS GROWTH MINDSET",
+        konteks: `<p class="analysis-text-para">Jurnal refleksi mata kuliah Growth Mindset Semester 1 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Menganalisis prinsip pola pikir berkembang (growth mindset) dan cara menumbuhkannya pada diri guru serta peserta didik agar mampu menghadapi tantangan belajar.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Growth Mindset (Carol Dweck):</strong> Keyakinan bahwa kemampuan dasar dapat dikembangkan melalui kerja keras, strategi yang baik, dan masukan dari orang lain.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Resilience and Grit:</strong> Ketahanan diri dalam menghadapi hambatan dan konsistensi usaha untuk jangka panjang.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Refleksi menyajikan rencana aksi nyata yang konkret untuk mengubah kegagalan siswa menjadi peluang belajar di bengkel.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Penilaian tingkat growth mindset siswa secara berkala perlu dirumuskan instrumen monitoringnya secara lebih jelas.</li>
+            </ul>`
+    },
     rpp_s2: {
         title: "ANALISIS RPP SIKLUS 2",
         konteks: `<p class="analysis-text-para">RPP mata pelajaran Teknik Pemesinan Non Konvensional kelas XI SMK Muhammadiyah 3 Yogyakarta. Dokumen untuk Siklus 2 ini membahas topik persiapan/perawatan mesin, K3, dan penulisan siklus bubut rata G71 menggunakan simulator Swansoft SSCNC (<em>FANUC 0i T</em>) selama 3 pertemuan (<strong>24 JP</strong>).</p>`,
