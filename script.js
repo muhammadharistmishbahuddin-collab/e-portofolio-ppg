@@ -1,4 +1,4 @@
-// Mobile Menu Toggle
+﻿// Mobile Menu Toggle
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-pills');
 
@@ -20,46 +20,116 @@ if (menuToggle && navLinks) {
     });
 }
 
-// Close mobile menu when clicking a link
-const links = document.querySelectorAll('.nav-pills li a');
-links.forEach(link => {
-    link.addEventListener('click', () => {
-        if (navLinks) {
-            navLinks.classList.remove('active');
+// Active Menu Controller (Scroll-Spy & Click Highlight)
+let isNavClickScrolling = false;
+let navClickTimer = null;
+
+const updateActiveNav = () => {
+    if (isNavClickScrolling) return;
+
+    const navAnchors = document.querySelectorAll('.nav-pills li a[href^="#"]');
+    if (!navAnchors.length) return;
+
+    // Collect valid target sections linked by the navigation
+    const targets = [];
+    navAnchors.forEach(anchor => {
+        const targetId = anchor.getAttribute('href').replace('#', '');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+            targets.push({ id: targetId, element: targetEl, anchor: anchor });
         }
-        if (menuToggle) {
-            const icon = menuToggle.querySelector('i');
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+    });
+
+    if (!targets.length) return;
+
+    let activeId = targets[0].id;
+    const scrollPos = window.scrollY || window.pageYOffset || 0;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // If near the top, highlight the first item (Beranda)
+    if (scrollPos < 120) {
+        activeId = targets[0].id;
+    }
+    // If reached the bottom of the page, highlight the last item
+    else if (scrollPos + windowHeight >= documentHeight - 60) {
+        activeId = targets[targets.length - 1].id;
+    } else {
+        // Find section whose top is closest above or near the header trigger point (180px)
+        const triggerPoint = 180;
+        for (let i = 0; i < targets.length; i++) {
+            const rect = targets[i].element.getBoundingClientRect();
+            if (rect.top <= triggerPoint) {
+                activeId = targets[i].id;
             }
         }
+    }
+
+    // Apply active class to the matching anchor and remove from others
+    navAnchors.forEach(anchor => {
+        const href = anchor.getAttribute('href');
+        if (href === `#${activeId}`) {
+            anchor.classList.add('active');
+        } else {
+            anchor.classList.remove('active');
+        }
     });
+};
+
+// Immediate click feedback & mobile menu closure
+document.addEventListener('DOMContentLoaded', () => {
+    const navAnchors = document.querySelectorAll('.nav-pills li a');
+    navAnchors.forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Close mobile menu if open
+            if (navLinks) {
+                navLinks.classList.remove('active');
+            }
+            if (menuToggle) {
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+
+            // If anchor links to a section, give instant active feedback
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                document.querySelectorAll('.nav-pills li a[href^="#"]').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+
+                // Lock scroll spy briefly during smooth scroll
+                isNavClickScrolling = true;
+                clearTimeout(navClickTimer);
+                navClickTimer = setTimeout(() => {
+                    isNavClickScrolling = false;
+                    updateActiveNav();
+                }, 800);
+            }
+        });
+    });
+
+    // Run once on load to set initial active tab
+    setTimeout(updateActiveNav, 50);
+    setTimeout(updateActiveNav, 150);
+    setTimeout(updateActiveNav, 400);
 });
 
-// Active Menu Highlight on Scroll
+window.addEventListener('load', updateActiveNav);
+window.addEventListener('hashchange', updateActiveNav);
+
+// Update active tab on scroll
+let navScrollTimeout;
 window.addEventListener('scroll', () => {
-    let current = '';
-    const sections = document.querySelectorAll('section, header');
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        // Adjust the offset to trigger slightly before reaching the exact top
-        if (pageYOffset >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    links.forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (current && href && href.includes(current) && href !== '#') {
-            link.classList.add('active');
-        }
-    });
-});
+    if (isNavClickScrolling) return;
+    if (!navScrollTimeout) {
+        navScrollTimeout = window.requestAnimationFrame(() => {
+            updateActiveNav();
+            navScrollTimeout = null;
+        });
+    }
+}, { passive: true });
 
 // Add subtle animation on scroll for elements
 const animateOnScroll = () => {
@@ -76,7 +146,6 @@ const animateOnScroll = () => {
     });
 };
 
-// Initialize elements for scroll animation
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.feature-card, .attach-card, .profile-card');
     cards.forEach(card => {
@@ -220,6 +289,19 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(applyGlobalFilter, 50);
         });
     });
+
+    // Auto-activate tab if URL hash points to a tab id
+    function checkTabHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+            const targetBtn = document.querySelector('.tab-btn[data-tab="' + hash + '"], .tab-btn-min[data-tab="' + hash + '"]');
+            if (targetBtn) {
+                targetBtn.click();
+            }
+        }
+    }
+    checkTabHash();
+    window.addEventListener('hashchange', checkTabHash);
 });
 
 // Document Analysis Modal Logic
@@ -312,6 +394,97 @@ const analysisData = {
         kekurangan: `
             <ul class="analysis-feature-list">
                 <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Penilaian tingkat growth mindset siswa secara berkala perlu dirumuskan instrumen monitoringnya secara lebih jelas.</li>
+            </ul>`
+    },
+    pse: {
+        title: "ANALISIS PEMBELAJARAN SOSIAL EMOSIONAL",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan jurnal refleksi mata kuliah Pembelajaran Sosial Emosional (PSE) Semester 2 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Menganalisis dan menginternalisasi kompetensi sosial emosional (CASEL) serta penerapan latihan kesadaran penuh (mindfulness) untuk mewujudkan iklim belajar yang aman, nyaman, dan mendukung well-being seluruh warga sekolah.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Framework CASEL (5 KSE):</strong> Kesadaran diri (self-awareness), manajemen diri (self-management), kesadaran sosial (social awareness), keterampilan berelasi (relationship skills), dan pengambilan keputusan yang bertanggung jawab.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Mindfulness & Teknik STOP:</strong> Latihan kesadaran penuh (Stop, Take a breath, Observe, Proceed) untuk meredakan kecemasan dan mengembalikan fokus belajar siswa.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Refleksi menyajikan integrasi konkret KSE ke dalam kegiatan awal, inti, dan penutup pembelajaran di kelas maupun lingkungan bengkel praktik.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Instrumen asesmen dan observasi berkala terhadap respon emosional siswa saat menghadapi tugas praktikum bertekanan tinggi perlu disempurnakan.</li>
+            </ul>`
+    },
+    pmal: {
+        title: "ANALISIS PEMBELAJARAN MENDALAM DAN ASESMEN LANJUT (PMAL)",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan artefak seminar dan jurnal refleksi mata kuliah Pembelajaran Mendalam dan Asesmen Lanjut (PMAL) Semester 2 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Menganalisis implementasi lanjutan perencanaan pembelajaran berbasis Understanding by Design (UbD), diferensiasi pengajaran berbasis kesiapan belajar (TaRL), pengintegrasian nilai kultural lokal (CRT), serta perancangan asesmen otentik yang komprehensif.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Teaching at the Right Level (TaRL):</strong> Pendekatan pembelajaran yang berpusat pada level kemampuan riil murid guna menuntaskan kesenjangan literasi/numerasi dan kompetensi kejuruan.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Culturally Responsive Teaching (CRT):</strong> Integrasi konteks budaya, kearifan lokal, dan lingkungan kerja nyata ke dalam studi kasus dan penugasan proyek.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Asesmen Otentik Berkelanjutan:</strong> Instrumen asesmen kinerja, rubrik analitik, dan penilaian portofolio untuk mengukur kemampuan berpikir tingkat tinggi (HOTS).</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Perancangan asesmen telah mengadopsi variasi instrumen formatif dan sumatif yang selaras dengan profil kompetensi teknis di bengkel.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Penyelarasan tingkat kesulitan tugas dengan rentang kemampuan siswa yang sangat heterogen membutuhkan lembar kerja pendukung (scaffolding sheet) yang lebih modular.</li>
+            </ul>`
+    },
+    ppl_mandiri: {
+        title: "ANALISIS PPL II MANDIRI",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan artefak seminar dan jurnal refleksi pelaksanaan Praktik Pengalaman Lapangan II (PPL II) Mandiri Semester 2 PPG Prajabatan di sekolah mitra.</p>`,
+        tujuan: `<p class="analysis-text-para">Melakukan refleksi komprehensif terhadap kesiapan dan kemandirian dalam mengelola proses pembelajaran secara penuh di kelas teknik pemesinan, mulai dari perencanaan, pelaksanaan asesmen otentik, hingga evaluasi tindakan pembelajaran.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Autonomous Teaching & Self-Efficacy:</strong> Kemandirian pengajaran dan efikasi diri guru dalam menguasai iklim belajar serta memotivasi partisipasi aktif siswa di bengkel.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Gibbs Reflective Cycle:</strong> Penerapan siklus refleksi mendalam (Description, Feelings, Evaluation, Analysis, Conclusion, Action Plan) untuk mengevaluasi setiap sesi pembelajaran praktikum mandiri.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Refleksi memaparkan keberhasilan pengelolaan kelas mandiri dengan penerapan instruksi keselamatan kerja (K3) bengkel yang disiplin dan terstruktur.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Dokumentasi respon belajar antar-kelompok kerja praktikum perlu dicatat lebih sistematis untuk memfasilitasi tindak lanjut diferensiasi instruksi.</li>
+            </ul>`
+    },
+    projek_kepemimpinan: {
+        title: "ANALISIS PROJEK KEPEMIMPINAN (PK)",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan artefak seminar dan laporan refleksi mata kuliah Projek Kepemimpinan Semester 2 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Menganalisis peran kepemimpinan transformasional dalam menginisiasi, merancang, mengkoordinasikan, serta mengevaluasi program inovasi berbasis tantangan riil di lingkungan masyarakat atau institusi pendidikan.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Service Learning Theory:</strong> Pendekatan pembelajaran aksi di mana mahasiswa menerapkan keahlian akademis untuk memecahkan isu riil komunitas mitra.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Project Management (SMART Goals & WBS):</strong> Manajemen proyek sistematis mulai dari analisis kebutuhan, alokasi peran tim, timeline, hingga manajemen risiko dan dampak keberlanjutan.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Sinergi tim dan keterlibatan aktif para pemangku kepentingan (stakeholders) tergambar jelas serta memberikan dampak positif yang dapat diukur.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Strategi pemantauan jangka panjang (monitoring & evaluasi pasca-proyek) memerlukan komitmen keterlibatan pihak mitra yang lebih berkesinambungan.</li>
+            </ul>`
+    },
+    inovasi_kejuruan: {
+        title: "ANALISIS INOVASI PEMBELAJARAN KEJURUAN",
+        konteks: `<p class="analysis-text-para">Dokumen ini merupakan artefak seminar dan laporan refleksi mata kuliah Inovasi Pembelajaran Kejuruan Semester 2 PPG Prajabatan.</p>`,
+        tujuan: `<p class="analysis-text-para">Mengembangkan, memvalidasi, dan merefleksikan efektivitas media inovasi pembelajaran teknis kejuruan (seperti modul digital dan panduan simulator CNC) guna mengoptimalkan keterampilan psikomotorik dan pemahaman konsep siswa.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>TPACK Framework:</strong> Integrasi harmonis antara teknologi digital permesinan, pedagogik interaktif, dan materi teknis presisi.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Cognitive Load Theory in Vocational Training:</strong> Penyederhanaan beban kognitif siswa dalam memahami pemrograman CNC melalui media visual bertahap dan simulasi.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Media inovasi yang dirancang sangat relevan dengan kebutuhan praktikum industri manufaktur modern dan mudah dipelajari peserta didik.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Uji coba skala luas dan analisis data pre-test/post-test terhadap efisiensi waktu belajar siswa pada simulator perlu ditambahkan jumlah sampelnya.</li>
             </ul>`
     },
     rpp_s2: {
@@ -927,6 +1100,250 @@ const analysisData = {
             <ul class="analysis-feature-list">
                 <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Dibutuhkan waktu observasi yang lebih detail dari guru untuk menelaah kesesuaian baris program G-Code siswa secara individual.</li>
             </ul>`
+    },
+    // ==========================================
+    // ARTEFAK PPL II MANDIRI (CNC MILLING)
+    // ==========================================
+    modul_cnc: {
+        title: "ANALISIS MODUL PEMBELAJARAN CNC MILLING",
+        konteks: `<p class="analysis-text-para">Modul ajar komprehensif mata pelajaran Teknik Pemesinan CNC Milling untuk siswa SMK bidang keahlian Teknik Mesin pada pelaksanaan PPL II Mandiri.</p>`,
+        tujuan: `<p class="analysis-text-para">Memberikan panduan pembelajaran holistik berbasis Project-Based Learning agar peserta didik menguasai kompetensi pengoperasian mesin, penerapan keselamatan kerja (K3), dan penyusunan program CNC Milling secara mandiri.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Competency-Based Education (CBE):</strong> Penyelarasan materi instruksional dengan standar kebutuhan industri manufaktur permesinan presisi.</li>
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Direct Instruction &amp; Experiential Learning:</strong> Integrasi demonstrasi terstruktur oleh guru dan praktik langsung permesinan oleh siswa di bengkel.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Sistematika materi sangat terstruktur, mulai dari pengenalan komponen mesin, kalkulasi parameter potong, hingga lembar kerja standar operasional industri.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Memerlukan pendampingan intensif pada tahap awal penentuan titik koordinat nol benda kerja untuk mencegah resiko tabrakan pahat (tool collision).</li>
+            </ul>`
+    },
+    rpp_mandiri_1: {
+        title: "ANALISIS RPP PPL MANDIRI SIKLUS 1",
+        konteks: `<p class="analysis-text-para">Perangkat RPP praktik mandiri Siklus 1 mengenai pengenalan panel kontrol, pemahaman koordinat mesin (Machine Coordinate), dan Standard Operating Procedure (SOP) keselamatan kerja CNC Milling.</p>`,
+        tujuan: `<p class="analysis-text-para">Membangun kesiapan mental, pemahaman K3 bengkel, serta kecakapan awal peserta didik dalam mengoperasikan panel kontrol CNC secara aman dan berdisiplin.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Standard Safety Procedures (K3LH):</strong> Pembiasaan kepatuhan keselamatan kerja permesinan berputar kecepatan tinggi dan penanganan darurat (emergency stop).</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Menanamkan budaya kerja industri (5R/5S) dan ketelitian operasional sejak awal pertemuan praktikum.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Siswa yang belum terbiasa dengan antarmuka numerik memerlukan bimbingan demonstrasi berulang.</li>
+            </ul>`
+    },
+    rpp_mandiri_2: {
+        title: "ANALISIS RPP PPL MANDIRI SIKLUS 2",
+        konteks: `<p class="analysis-text-para">Perangkat RPP praktik mandiri Siklus 2 berfokus pada sistem koordinat kartesius (G90 Absolut dan G91 Inkremental) serta teknik penjepitan benda kerja menggunakan ragum presisi.</p>`,
+        tujuan: `<p class="analysis-text-para">Melatih kemampuan spasial dan perhitungan matematis peserta didik dalam merencanakan lintasan gerak pahat milling serta memastikan pencekaman yang aman.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Spatial Reasoning in Engineering:</strong> Kemampuan memvisualisasikan pergerakan tiga dimensi sumbu X, Y, dan Z pada mesin perkakas.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Latihan berjenjang dari plotting manual di lembar grafik kerja hingga input data koordinat langsung ke kontrol mesin.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Diperlukan verifikasi ganda tanda koordinat positif dan negatif sumbu Z sebelum tombol cycle start ditekan.</li>
+            </ul>`
+    },
+    rpp_mandiri_3: {
+        title: "ANALISIS RPP PPL MANDIRI SIKLUS 3",
+        konteks: `<p class="analysis-text-para">Perangkat RPP praktik mandiri Siklus 3 membahas penentuan titik nol benda kerja (Work Coordinate System G54) dan setting kompensasi panjang pahat (Tool Length Offset).</p>`,
+        tujuan: `<p class="analysis-text-para">Mengembangkan keterampilan presisi dan ketelitian siswa dalam melakukan kalibrasi instrumen mesin sebelum eksekusi program pemotongan.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Metrology &amp; Calibration Precision:</strong> Konsep dasar pengukuran akurat dan toleransi geometrik pemesinan presisi.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Melatih kemandirian dan rasa percaya diri siswa dalam menggunakan alat ukur edge finder mekanik/elektronik.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Ketersediaan unit edge finder memerlukan rotasi stasiun kerja yang terorganisir dengan rapi.</li>
+            </ul>`
+    },
+    rpp_mandiri_4: {
+        title: "ANALISIS RPP PPL MANDIRI SIKLUS 4",
+        konteks: `<p class="analysis-text-para">Perangkat RPP praktik mandiri Siklus 4 membahas permesinan kontur linier, interpolasi melingkar (G02/G03), dan pembuatan rongga pocket berundak.</p>`,
+        tujuan: `<p class="analysis-text-para">Meningkatkan kecakapan siswa dalam mengeksekusi program permesinan kompleks dengan kompensasi radius pisau (G41/G42).</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Toolpath Optimization:</strong> Efisiensi lintasan pemotongan, penentuan kecepatan sayat (cutting speed), dan depth of cut optimal.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Benda kerja latihan menghasilkan produk riil yang memotivasi antusiasme belajar siswa.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Siswa harus cermat membedakan arah pemakanan searah jarum jam (G02) dan berlawanan (G03).</li>
+            </ul>`
+    },
+    rpp_mandiri_5: {
+        title: "ANALISIS RPP PPL MANDIRI SIKLUS 5",
+        konteks: `<p class="analysis-text-para">Perangkat RPP praktik mandiri Siklus 5 berfokus pada penyelesaian proyek terpadu, siklus tetap pengeboran (canned cycle), dan kendali mutu produk akhir.</p>`,
+        tujuan: `<p class="analysis-text-para">Menguji kompetensi utuh peserta didik dalam memproduksi komponen mekanik presisi sesuai gambar kerja teknik serta melakukan penilaian kendali mutu mandiri.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Total Quality Management (TQM):</strong> Budaya kerja mutu zero defect dan continuous improvement dalam pendidikan kejuruan.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Proyek terpadu memberikan kepuasan belajar tinggi dan portofolio produk nyata bagi siswa.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Memerlukan alokasi manajemen waktu pemesinan yang ketat per stasiun mesin milling.</li>
+            </ul>`
+    },
+    bahan_ajar_cnc: {
+        title: "ANALISIS BAHAN AJAR CNC MILLING",
+        konteks: `<p class="analysis-text-para">Bahan ajar materi dasar pengoperasian dan pemrograman mesin CNC Milling untuk pendampingan belajar teoritis dan instruksi bengkel.</p>`,
+        tujuan: `<p class="analysis-text-para">Memfasilitasi siswa memahami struktur kode instruksi standar ISO/DIN, perhitungan parameter pemotongan, dan keselamatan kerja.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Machining Principles &amp; Mechanics:</strong> Teori pemotongan logam, pembentukan geram (chip formation), dan umur pakai pahat.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Dilengkapi diagram grafis ilustratif, tabel rumus pemotongan praktis, dan contoh kode pemrograman aplikatif.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Dapat diperkaya lebih lanjut dengan integrasi tautan multimedia simulasi interaktif 3D.</li>
+            </ul>`
+    },
+    asesmen_cnc: {
+        title: "ANALISIS ASESMEN JOBSHEET CNC",
+        konteks: `<p class="analysis-text-para">Instrumen evaluasi penilaian unjuk kerja dan rubrik asesmen jobsheet praktik CNC Milling pada PPL II Mandiri.</p>`,
+        tujuan: `<p class="analysis-text-para">Menyediakan instrumen penilaian otentik yang objektif untuk mengevaluasi dimensi produk, kepatuhan K3, dan etos kerja industri peserta didik.</p>`,
+        teori: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Authentic &amp; Performance-Based Assessment:</strong> Pengukuran langsung pada keterampilan kinerja riil siswa di bengkel.</li>
+            </ul>`,
+        kelebihan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-check" style="color: #059669;"></i> Rubrik terstruktur secara transparan meliputi ranah persiapan, proses kerja, hasil dimensi produk, dan ketepatan waktu.</li>
+            </ul>`,
+        kekurangan: `
+            <ul class="analysis-feature-list">
+                <li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Memerlukan lembar cek fisik terpisah di samping setiap mesin selama praktikum berlangsung.</li>
+            </ul>`
+    },
+    jobsheet_1: {
+        title: "ANALISIS JOBSHEET 1: PENGENALAN & KONTROL CNC",
+        konteks: `<p class="analysis-text-para">Jobsheet 1 memandu pengenalan fisik panel kontrol CNC Milling, tombol darurat (emergency stop), sumbu X-Y-Z, dan prosedur start-up serta zero return mesin.</p>`,
+        tujuan: `<p class="analysis-text-para">Memastikan peserta didik mengenali antarmuka kontrol mesin dan menguasai prosedur penyalaan tanpa resiko bahaya mekanik maupun elektrikal.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Human-Machine Interface (HMI) &amp; K3LH:</strong> Prinsip interaksi operator dengan panel numerik dan mitigasi insiden kerja bengkel.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Petunjuk langkah demi langkah sangat jelas dan mudah dipahami oleh pemula.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Perlu pengawasan ketat saat pertama kali melakukan homing mesin ke reference point.</li></ul>`
+    },
+    jobsheet_2: {
+        title: "ANALISIS JOBSHEET 2: PEMASANGAN RAGUM & ALIGNMENT",
+        konteks: `<p class="analysis-text-para">Jobsheet 2 memandu pemasangan ragum pada meja T-slot serta kalibrasi kelurusan menggunakan dial test indicator (DTI).</p>`,
+        tujuan: `<p class="analysis-text-para">Melatih keterampilan metrologi dasar untuk menjamin kepresisian posisi pencekaman benda kerja terhadap sumbu gerak mesin.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Geometrical Alignment:</strong> Teori kelurusan bidang referensi pencekaman terhadap sumbu transversal meja mesin.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Mengembangkan keterampilan tangan (manual dexterity) dan ketelitian membaca skala jarum ukur.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Siswa memerlukan latihan berulang dalam mengetuk ragum agar mencapai toleransi penyimpangan di bawah 0.02 mm.</li></ul>`
+    },
+    jobsheet_3: {
+        title: "ANALISIS JOBSHEET 3: WORK COORDINATE SETTING (G54)",
+        konteks: `<p class="analysis-text-para">Jobsheet 3 memandu penentuan titik nol benda kerja sumbu X, Y, Z menggunakan edge finder mekanik/elektronik.</p>`,
+        tujuan: `<p class="analysis-text-para">Memampukan siswa melakukan setting WCS G54 secara mandiri dan akurat sesuai gambar kerja.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Work Coordinate System (WCS):</strong> Transformasi koordinat mesin ke sistem koordinat benda kerja lokal.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Prosedur mencakup perhitungan kompensasi radius probe edge finder secara tepat.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Perlu kehati-hatian agar putaran spindel saat menggunakan edge finder mekanik tidak melebihi kecepatan rekomendasi.</li></ul>`
+    },
+    jobsheet_4: {
+        title: "ANALISIS JOBSHEET 4: TOOL LENGTH OFFSET & KALIBRASI",
+        konteks: `<p class="analysis-text-para">Jobsheet 4 berfokus pada pengukuran panjang alat potong (H offset) dan radius cutter (D offset).</p>`,
+        tujuan: `<p class="analysis-text-para">Mencegah tabrakan pahat dan memastikan kedalaman pemotongan setiap alat potong di magasin sesuai target program.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Tool Geometry Offset:</strong> Kompensasi dimensi fisik pahat dalam kalkulasi koordinat Z mesin CNC.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Menggunakan metode kalibrasi gauge block / tool presetter yang aman dan akurat.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Registrasi nomor tool di tabel geometri kontrol mesin harus dicocokkan dengan nomor stasiun magazine.</li></ul>`
+    },
+    jobsheet_5: {
+        title: "ANALISIS JOBSHEET 5: PEMROGRAMAN & FACING PERMUKAAN",
+        konteks: `<p class="analysis-text-para">Jobsheet 5 memandu penulisan kode program pemakanan rata muka (face milling) dan pengetikan langsung pada mesin.</p>`,
+        tujuan: `<p class="analysis-text-para">Melatih penyusunan program manual dan menghasilkan bidang acuan dasar benda kerja yang datar, siku, dan halus.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Face Milling Mechanics:</strong> Parameter penyayatan muka, step-over cutter, dan kualitas kekasaran permukaan (Ra).</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Siswa langsung melihat korelasi antara parameter feed per tooth dengan kilap hasil pemotongan.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Membutuhkan penggunaan cairan pendingin (coolant) yang optimal agar pahat tidak cepat aus.</li></ul>`
+    },
+    jobsheet_6: {
+        title: "ANALISIS JOBSHEET 6: PEMESINAN KONTUR LINIER LUAR",
+        konteks: `<p class="analysis-text-para">Jobsheet 6 memandu pemotongan profil luar lurus dan persegi bertingkat menggunakan kompensasi radius pisau frais (G41/G42).</p>`,
+        tujuan: `<p class="analysis-text-para">Mengembangkan kemampuan siswa dalam mengontrol dimensi luar benda kerja dan menerapkan radius compensation secara benar.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Cutter Radius Compensation (CRC):</strong> Pengaturan lintasan pusat pisau frais terhadap kontur gambar kerja.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Memperkenalkan transisi lead-in dan lead-out yang halus untuk mencegah bekas goresan pada benda kerja.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Diperlukan pemahaman yang kuat terkait arah potong climb vs conventional milling.</li></ul>`
+    },
+    jobsheet_7: {
+        title: "ANALISIS JOBSHEET 7: INTERPOLASI RADIUS (G02/G03)",
+        konteks: `<p class="analysis-text-para">Jobsheet 7 memandu pembuatan busur lingkaran, radius pojok, dan profil fillet menggunakan kode interpolasi melingkar.</p>`,
+        tujuan: `<p class="analysis-text-para">Memahami parameter vektor pusat busur (I, J) atau nilai radius (R) dalam pembuatan sudut membulat presisi.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Circular Interpolation Trigonometry:</strong> Formulasi matematis kurva busur pada bidang dua dimensi G17.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Meningkatkan estetika dan ergonomi produk benda kerja yang dihasilkan siswa.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Siswa harus teliti menghitung titik singgung koordinat awal dan akhir busur kurva.</li></ul>`
+    },
+    jobsheet_8: {
+        title: "ANALISIS JOBSHEET 8: PEMBUATAN POCKET PERSEGI",
+        konteks: `<p class="analysis-text-para">Jobsheet 8 memandu pemesinan rongga kantong persegi tertutup (rectangular pocketing) dengan metode penyayatan bertingkat lapis demi lapis.</p>`,
+        tujuan: `<p class="analysis-text-para">Menguasai strategi pemakanan rongga dalam, penanganan geram tertutup, dan pencegahan patah pahat endmill.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Pocketing Strategy &amp; Chip Evacuation:</strong> Manajemen pembuangan tatal logam pada ruang sempit permesinan.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Melatih siswa mengatur kedalaman potong per lapis (axial depth of cut) secara proporsional.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Penumpukan tatal pada dasar rongga harus ditiup dengan udara bertekanan secara berkala.</li></ul>`
+    },
+    jobsheet_9: {
+        title: "ANALISIS JOBSHEET 9: PEMBUATAN POCKET LINGKARAN",
+        konteks: `<p class="analysis-text-para">Jobsheet 9 mengajarkan teknik permesinan kantong lingkaran menggunakan interpolasi sirkular spiral berjenjang.</p>`,
+        tujuan: `<p class="analysis-text-para">Melatih eksekusi gerakan kontinu dari titik pusat lubang menuju radius akhir pocketing.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Helical Ramp Entry &amp; Spiral Milling:</strong> Teknik penetrasi pahat bertahap tanpa beban impak berlebih.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Menghasilkan rongga silindris konsentris dengan permukaan dinding yang mulus.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Siswa perlu cermat menguji program pada mode dry-run sebelum pemotongan sesungguhnya.</li></ul>`
+    },
+    jobsheet_10: {
+        title: "ANALISIS JOBSHEET 10: SIKLUS BOR CANNED CYCLE (G81/G83)",
+        konteks: `<p class="analysis-text-para">Jobsheet 10 memandu pembuatan lubang menggunakan siklus tetap bor rintisan (G81) dan pengeboran bertahap (peck drilling G83).</p>`,
+        tujuan: `<p class="analysis-text-para">Menguasai otomatisasi siklus pengeboran serta pengeluaran tatal secara periodik saat membuat lubang dalam.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Canned Cycles Automation:</strong> Efisiensi pemrograman siklus berulang pada pengontrol CNC.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Kode program menjadi jauh lebih ringkas, terstruktur, dan mudah dibaca oleh operator.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Pastikan nilai bidang mundur (R-plane) diatur cukup tinggi dari permukaan benda kerja.</li></ul>`
+    },
+    jobsheet_11: {
+        title: "ANALISIS JOBSHEET 11: CHAMFERING & DEBURRING TEPI",
+        konteks: `<p class="analysis-text-para">Jobsheet 11 memandu penumpulan sisi tajam profil benda kerja (chamfering 45 derajat) menggunakan pisau chamfer mill.</p>`,
+        tujuan: `<p class="analysis-text-para">Menghasilkan produk benda kerja yang bebas geram tajam, aman dipegang, dan memenuhi standar estetika manufaktur.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Edge Finishing &amp; Deburring Standards:</strong> Standar industri terhadap kenyamanan sentuh dan keamanan mekanik.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Memberikan sentuhan akhir profesional pada produk hasil karya siswa.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Perhitungan kedalaman Z pisau chamfer harus akurat agar lebar chamfer konsisten.</li></ul>`
+    },
+    jobsheet_12: {
+        title: "ANALISIS JOBSHEET 12: PEMBUATAN PROYEK TERPADU",
+        konteks: `<p class="analysis-text-para">Jobsheet 12 merupakan tugas proyek terpadu (masterpiece) yang mengintegrasikan teknik facing, pocketing, kontur luar, dan deret lubang.</p>`,
+        tujuan: `<p class="analysis-text-para">Menguji kemandirian dan kompetensi sintesis manufaktur siswa dalam merealisasikan produk utuh dari gambar teknik.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Integrated Manufacturing &amp; Process Planning:</strong> Penentuan urutan operasional (process sequence) yang paling efisien.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Meningkatkan kepercayaan diri siswa secara signifikan sebagai calon teknisi permesinan profesional.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Memerlukan konsentrasi tinggi dan pengecekan tahapan kerja agar tidak terjadi cacat proses di akhir pengerjaan.</li></ul>`
+    },
+    jobsheet_13: {
+        title: "ANALISIS JOBSHEET 13: KENDALI MUTU & METROLOGI",
+        konteks: `<p class="analysis-text-para">Jobsheet 13 berfokus pada inspeksi metrologi dimensi akhir, pengukuran toleransi geometris, dan evaluasi hasil kerja siswa.</p>`,
+        tujuan: `<p class="analysis-text-para">Membiasakan budaya kendali mutu (Quality Control) industri dan pencatatan lembar inspeksi metrologis secara objektif.</p>`,
+        teori: `<ul class="analysis-feature-list"><li><i class="fas fa-book-open" style="color: #4f46e5;"></i> <strong>Quality Assurance &amp; Metrology Verification:</strong> Teknik pengukuran presisi menggunakan mikrometer sekrup dan dial bore gauge.</li></ul>`,
+        kelebihan: `<ul class="analysis-feature-list"><li><i class="fas fa-check" style="color: #059669;"></i> Siswa belajar bertanggung jawab terhadap akurasi dimensi produk buatannya sendiri.</li></ul>`,
+        kekurangan: `<ul class="analysis-feature-list"><li><i class="fas fa-exclamation-triangle" style="color: #dc2626;"></i> Alat ukur presisi harus selalu dirawat dan dikalibrasi berkala agar hasil ukur valid.</li></ul>`
     }
 };
 
@@ -961,7 +1378,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Unified function to open modal with tabs
-    window.openArtifactModal = (type, url) => {
+    window.openArtifactModal = (type, url, customTitle) => {
         const data = analysisData[type];
         
         modal.classList.remove('text-only');
@@ -973,7 +1390,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (data) {
             // Setup Modal Header
-            modalTitle.innerText = data.title;
+            modalTitle.innerText = customTitle || data.title;
             
             // Reset tabs to first tab (Konteks)
             analysisTabs.forEach(t => t.classList.remove('active'));
@@ -983,7 +1400,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Render initial text
             textContent.innerHTML = data.konteks;
         } else {
-            modalTitle.innerText = "Pratinjau Dokumen";
+            modalTitle.innerText = customTitle || "Pratinjau Dokumen";
         }
         
         // Handle Iframe vs Text-only logic
@@ -1127,3 +1544,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Interactive Custom Video Stage Player
+window.playCustomVideo = function(videoId) {
+    var id = videoId || 'BIyQOfbiYwc';
+    var stage = document.getElementById('video-stage-container');
+    if (stage && !stage.classList.contains('playing')) {
+        stage.classList.add('playing');
+        stage.removeAttribute('onclick');
+        stage.style.cursor = 'default';
+        stage.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" title="Video Praktik Mengajar Mandiri UTS CNC Milling - Harist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 18px; display: block;"></iframe>';
+    }
+};
+
+window.playUtsVideo = function() {
+    var stage = document.getElementById('uts-video-stage-container');
+    if (stage && !stage.classList.contains('playing')) {
+        stage.classList.add('playing');
+        stage.removeAttribute('onclick');
+        stage.style.cursor = 'default';
+        stage.innerHTML = '<iframe src="https://www.youtube.com/embed/BIyQOfbiYwc?autoplay=1&rel=0" title="Video UTS PPL Mandiri CNC Milling - Harist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px; display: block;"></iframe>';
+    }
+};
+window.playUasVideo = function() {
+    var stage = document.getElementById('uas-video-stage-container');
+    if (stage && !stage.classList.contains('playing')) {
+        stage.classList.add('playing');
+        stage.removeAttribute('onclick');
+        stage.style.cursor = 'default';
+        stage.innerHTML = '<iframe src="https://www.youtube.com/embed/rHFawXxnXXg?autoplay=1&rel=0" title="Video UAS PPL Mandiri CNC Milling - Harist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px; display: block;"></iframe>';
+    }
+};

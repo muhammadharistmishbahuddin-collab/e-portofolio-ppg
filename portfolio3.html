@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -10,7 +10,19 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Poppins:wght@400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=11">
+    <link rel="stylesheet" href="styles.css?v=41">
+    <style>
+        .file-action .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-decoration: none;
+            text-align: center;
+            padding: 0.5rem 0.35rem;
+            font-size: 0.82rem;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -18,6 +30,9 @@
 
     <!-- Navigation -->
     <nav class="top-nav">
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
         <ul class="nav-pills">
             <li><a href="index.html?skip-splash=true" style="background-color: var(--secondary-color); color: var(--bg-main);"><i class="fas fa-arrow-left"></i> Kembali</a></li>
             <li><a href="#home" class="active">Beranda</a></li>
@@ -100,8 +115,9 @@
                             <div class="file-action">
                                 <button
                                     onclick="openArtifactModal('ppl_terbimbing', 'https://drive.google.com/file/d/1fbfT0tW0OEH-tkAe4fli0kGYvL-6DzKt/preview')"
-                                    class="btn-outline">Analisis</button>
-                                <a href="https://drive.google.com/file/d/1fbfT0tW0OEH-tkAe4fli0kGYvL-6DzKt/view" class="btn-outline" target="_blank">Unduh</a>
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1-ESGiD1ncCzaXC1rNK6lmy0mmPm5suED/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/1fbfT0tW0OEH-tkAe4fli0kGYvL-6DzKt/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
                             </div>
                         </div>
                     </div>
@@ -118,8 +134,9 @@
                             <div class="file-action">
                                 <button
                                     onclick="openArtifactModal('growth_mindset', 'https://drive.google.com/file/d/1obkvtEst0zFD3TWqzunRn9OCvH_9JD9Q/preview')"
-                                    class="btn-outline">Analisis</button>
-                                <a href="https://drive.google.com/file/d/1obkvtEst0zFD3TWqzunRn9OCvH_9JD9Q/view" class="btn-outline" target="_blank">Unduh</a>
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1jS2tYVdcuWv8I7GV1fi7xjW4UkiJKMWE/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/1obkvtEst0zFD3TWqzunRn9OCvH_9JD9Q/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
                             </div>
                         </div>
                     </div>
@@ -136,8 +153,9 @@
                             <div class="file-action">
                                 <button
                                     onclick="openArtifactModal('pembelajaran_mendalam_asesmen', 'https://drive.google.com/file/d/154wuB27f31rxd0a8SOZaHQJCzoT8k5da/preview')"
-                                    class="btn-outline">Analisis</button>
-                                <a href="https://drive.google.com/file/d/154wuB27f31rxd0a8SOZaHQJCzoT8k5da/view" class="btn-outline" target="_blank">Unduh</a>
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/17chGdNWnEghGtZ2ri-CA2dAC7ExwSlce/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/154wuB27f31rxd0a8SOZaHQJCzoT8k5da/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
                             </div>
                         </div>
                     </div>
@@ -154,8 +172,9 @@
                             <div class="file-action">
                                 <button
                                     onclick="openArtifactModal('filosofi_pendidikan_nilai', 'https://drive.google.com/file/d/1ICLyfCfg4JeHUCfiBqjbMXXwbs8VCrWK/preview')"
-                                    class="btn-outline">Analisis</button>
-                                <a href="https://drive.google.com/file/d/1ICLyfCfg4JeHUCfiBqjbMXXwbs8VCrWK/view" class="btn-outline" target="_blank">Unduh</a>
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1eiSBjwJGdJrUbeXVz2Re61iR_vnmarFN/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/1ICLyfCfg4JeHUCfiBqjbMXXwbs8VCrWK/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
                             </div>
                         </div>
                     </div>
@@ -172,8 +191,104 @@
                             <div class="file-action">
                                 <button
                                     onclick="openArtifactModal('pemahaman_peserta_didik', 'https://drive.google.com/file/d/1Me1z-IjIU89r6nfsU0wAM7iSNmHhas0Q/preview')"
-                                    class="btn-outline">Analisis</button>
-                                <a href="https://drive.google.com/file/d/1Me1z-IjIU89r6nfsU0wAM7iSNmHhas0Q/view" class="btn-outline" target="_blank">Unduh</a>
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1aD9QtwTxomO6VSwxkRfNPvvr60APu6gw/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/1Me1z-IjIU89r6nfsU0wAM7iSNmHhas0Q/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matkul Semester 2: PSE -->
+                    <div class="file-item" data-category="sem2">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=193KpqQCDfC96Y7cgxJ-WU9vFXiHbSRmT&sz=w1000" alt="Preview Pembelajaran Sosial Emosional">
+                            <div class="file-badge" style="background-color: #06b6d4;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Pembelajaran Sosial Emosional (PSE)</h4>
+                            <p>Refleksi mengenai penerapan 5 kompetensi sosial emosional (CASEL), mindfulness (kesadaran penuh), serta penciptaan iklim kelas yang aman dan mendukung well-being peserta didik.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('pse', 'https://drive.google.com/file/d/193KpqQCDfC96Y7cgxJ-WU9vFXiHbSRmT/preview')"
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1H4E0RAePMkxuczzozLsDLbzuiUhv-Mz9/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/193KpqQCDfC96Y7cgxJ-WU9vFXiHbSRmT/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matkul Semester 2: PMAL -->
+                    <div class="file-item" data-category="sem2">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=148VDNvnikKRgQYB0u4bLMHgvrR38Z16y&sz=w1000" alt="Preview Pembelajaran Mendalam dan Asesmen Lanjut">
+                            <div class="file-badge" style="background-color: #8b5cf6;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Pembelajaran Mendalam dan Asesmen Lanjut (PMAL)</h4>
+                            <p>Refleksi mengenai penerapan lanjutan pendekatan Understanding by Design (UbD), Teaching at the Right Level (TaRL), dan Culturally Responsive Teaching (CRT) dalam pembelajaran serta asesmen komprehensif.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('pmal', 'https://drive.google.com/file/d/148VDNvnikKRgQYB0u4bLMHgvrR38Z16y/preview')"
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1DI-FxVS-ZoDr2DjPUkhwxrBf0miQF2to/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/148VDNvnikKRgQYB0u4bLMHgvrR38Z16y/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matkul Semester 2: PPL II Mandiri -->
+                    <div class="file-item" data-category="sem2">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=1xBeSCcTWpzyDcTPfzm1kUojMxzzuhfHC&sz=w1000" alt="Preview PPL II Mandiri">
+                            <div class="file-badge" style="background-color: #10b981;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>PPL II Mandiri</h4>
+                            <p>Refleksi mendalam mengenai pelaksanaan praktik mengajar mandiri, pengelolaan kelas vokasi secara otonom, bimbingan siswa, dan keterlibatan dalam kegiatan persekolahan.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('ppl_mandiri', 'https://drive.google.com/file/d/1xBeSCcTWpzyDcTPfzm1kUojMxzzuhfHC/preview')"
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1xBeSCcTWpzyDcTPfzm1kUojMxzzuhfHC/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
+                                <a href="portfolio4.html" class="btn-outline" title="Buka Halaman Lengkap Portofolio PPL II Mandiri"><i class="fas fa-arrow-right"></i> PPL II</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matkul Semester 2: Projek Kepemimpinan -->
+                    <div class="file-item" data-category="sem2">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=1nnQw7A4ltX5nghvDr3bdI06oyXSHUZY7&sz=w1000" alt="Preview Projek Kepemimpinan">
+                            <div class="file-badge" style="background-color: #f59e0b;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Projek Kepemimpinan (PK)</h4>
+                            <p>Refleksi mengenai perancangan, kepemimpinan tim, dan pelaksanaan projek perubahan berbasis komunitas atau lingkungan sekolah mitra secara kolaboratif.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('projek_kepemimpinan', 'https://drive.google.com/file/d/1nnQw7A4ltX5nghvDr3bdI06oyXSHUZY7/preview')"
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1lN151zSQw5NAUpk9InBckh9tORETHb55/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/1nnQw7A4ltX5nghvDr3bdI06oyXSHUZY7/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matkul Semester 2: Inovasi Pembelajaran Kejuruan -->
+                    <div class="file-item" data-category="sem2">
+                        <div class="file-thumbnail">
+                            <img src="https://drive.google.com/thumbnail?id=13VisDRzCjjphNxIzu8xsiqK7exn8A6zO&sz=w1000" alt="Preview Inovasi Pembelajaran Kejuruan">
+                            <div class="file-badge" style="background-color: #e11d48;">Refleksi</div>
+                        </div>
+                        <div class="file-info">
+                            <h4>Inovasi Pembelajaran Kejuruan</h4>
+                            <p>Refleksi mengenai rancang bangun media pembelajaran interaktif, adaptasi teknologi terkini simulator CNC, dan inovasi metodologi di era vokasi modern.</p>
+                            <div class="file-action">
+                                <button
+                                    onclick="openArtifactModal('inovasi_kejuruan', 'https://drive.google.com/file/d/13VisDRzCjjphNxIzu8xsiqK7exn8A6zO/preview')"
+                                    class="btn-outline" title="Lihat Kajian Analisis"><i class="fas fa-search"></i> Analisis</button>
+                                <a href="https://drive.google.com/file/d/1V8ntSrWgjKjO09J8BXO9b9sapz9IU6Ko/view" class="btn-outline" target="_blank" title="Buka Dokumen LK 2 Refleksi Belajar"><i class="fas fa-file-alt"></i> LK 2</a>
+                                <a href="https://drive.google.com/file/d/13VisDRzCjjphNxIzu8xsiqK7exn8A6zO/view" class="btn-outline" target="_blank" title="Buka Makalah / Dokumen Seminar"><i class="fas fa-file-pdf"></i> Seminar</a>
                             </div>
                         </div>
                     </div>
@@ -271,7 +386,7 @@
                 <div class="footer-links">
                     <h4>Tautan Cepat</h4>
                     <ul class="footer-nav-grid" style="grid-template-columns: 1fr;">
-                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#home" class="active">Beranda</a></li>
                         <li><a href="#refleksi-matkul">Refleksi Matkul</a></li>
                         <li><a href="#dokumentasi">Dokumentasi</a></li>
                     </ul>
@@ -326,7 +441,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=41"></script>
     <script>
         // Scroll reveal animation for Timeline and Bento grid
         document.addEventListener('DOMContentLoaded', function() {
